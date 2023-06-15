@@ -11,6 +11,30 @@ let finalScore = 20;
 let highscore2 = 0;
 let randomNumber = Math.trunc(Math.random() * 20) + 1;
 
+const displayMessage = function(content) {
+  message.textContent = content;
+};
+
+const displayNumber = function() {
+  number.textContent = randomNumber;
+};
+
+const displayHighscore = function(highscore) {
+  highscoreLabel.textContent = highscore;
+}
+
+const displayCurrentScore = function() {
+  score.textContent = finalScore;
+}
+
+const changeBackgroundColor = function(colour) {
+  body.style.backgroundColor = colour;
+}
+
+const changeWidth = function(length) {
+  number.style.width = length;
+}
+
 document.querySelector('.check').addEventListener('click', function() {
   const guess = Number(document.querySelector('.guess').value);
 
@@ -18,36 +42,36 @@ document.querySelector('.check').addEventListener('click', function() {
     message.textContent = 'Not a Number';
 
   } else if (guess === randomNumber) {
-    message.textContent = 'Correct Answer';
-    number.textContent = randomNumber;
-    highscoreLabel.textContent = score;
-    body.style.backgroundColor = '#60b347';
-    number.style.width = '30rem';
+    displayMessage('Correct Answer');
+    displayNumber();
+    displayHighscore(score);
+    changeBackgroundColor('#60b347');
+    changeWidth('30rem')
     if (finalScore > highscore2 ) {
       highscore2 = score.textContent;
-      highscoreLabel.textContent = highscore2;
+      displayHighscore(highscore2);
     } else {
-      highscoreLabel.textContent = highscore2;
+      displayHighscore(highscore2);;
     }
 
   } else if (guess !== randomNumber ) {
     if (finalScore > 0) {
-      message.textContent = guess > randomNumber ? 'Too High' : 'Too Low';
+      displayMessage(guess > randomNumber ? 'Too High' : 'Too Low');
       finalScore--;
-      score.textContent = finalScore;
+      displayCurrentScore();
     } else {
-      message.textContent = 'You Lost the Game';
+      displayMessage('You Lost the Game');
     };
   }
 });
 
 document.querySelector('.again').addEventListener('click', function() {
   randomNumber = Math.trunc(Math.random() * 20) + 1;
-  message.textContent = 'Start guessing...';
+  displayMessage('Start guessing...');
   finalScore = 20;
-  score.textContent = finalScore;
-  body.style.backgroundColor = '#222';
-  number.style.width = '15rem';
+  displayCurrentScore();
+  changeBackgroundColor('#222');
+  changeWidth('15rem');
   number.textContent = '?'
   input.value = "";
 })
