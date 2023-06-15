@@ -30,36 +30,9 @@ document.querySelector('.check').addEventListener('click', function() {
       highscoreLabel.textContent = highscore2;
     }
 
-  } else if (guess > (randomNumber + 5)) {
+  } else if (guess !== randomNumber ) {
     if (finalScore > 0) {
-      message.textContent = 'Too High';
-      finalScore--;
-      score.textContent = finalScore;
-    } else {
-      message.textContent = 'You Lost the Game';
-    };
-
-  } else if (guess > randomNumber) {
-    if (finalScore > 0) {
-      message.textContent = 'Your Number is High';
-      finalScore--;
-      score.textContent = finalScore;
-    } else {
-      message.textContent = 'You Lost the Game';
-    };
-
-  } else if (guess < (randomNumber - 5)) {
-    if (finalScore > 0) {
-      message.textContent = 'Too Low';
-      finalScore--;
-      score.textContent = finalScore;
-    } else {
-      message.textContent = 'You Lost the Game';
-    };
-
-  } else if (guess < randomNumber) {
-    if (finalScore > 0) {
-      message.textContent = 'Your Number is Low';
+      message.textContent = guess > randomNumber ? 'Too High' : 'Too Low';
       finalScore--;
       score.textContent = finalScore;
     } else {
